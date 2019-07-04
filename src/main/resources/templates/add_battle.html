@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Battle</title>
+</head>
+<body>
+<form action="/add_battle" method="get">
+        <table class="enemiesTable">
+            <tr>
+                <th>Result</th>
+                <th>Hero Name</th>
+                <th>Enemy Name</th>
+            </tr>
+            <tr>
+                <td>Enemy</td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <select name = "result">
+                            <option>{{loose}}</option>
+                            <option>{{victory}}</option>
+                            <option>{{halfVictory}}</option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                            <select name = "heroName">
+                                {{#heroes}}
+                                    <option >{{name}}</option>
+                                {{/heroes}}
+                            </select>
+                    </label>
+                </td>
+                <td>
+                    <input type="text" name="name" /><br/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>You</td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <select name = "result">
+                            <option>{{loose}}</option>
+                            <option>{{victory}}</option>
+                            <option>{{halfVictory}}</option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <select name = "heroName">
+                            {{#heroes}}
+                            <option >{{name}}</option>
+                            {{/heroes}}
+                        </select>
+                    </label>
+                </td>
+            </tr>
+        </table>
+    <input type="submit"/>
+</form>
+</body>
+</html>
