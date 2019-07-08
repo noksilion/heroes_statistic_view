@@ -16,7 +16,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     public ViewResolver getViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/templates/");
-        resolver.setSuffix(".html");
+        resolver.setSuffix(".ftl");
         return resolver;
     }
 

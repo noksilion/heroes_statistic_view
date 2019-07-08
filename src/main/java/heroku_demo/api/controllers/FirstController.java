@@ -1,9 +1,6 @@
 package heroku_demo.api.controllers;
 
-import heroku_demo.api.dto.AccountCredentials;
-import heroku_demo.api.dto.CastleDto;
-import heroku_demo.api.dto.HeroDto;
-import heroku_demo.api.dto.TokenDto;
+import heroku_demo.api.dto.*;
 import lombok.AllArgsConstructor;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -20,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
+import javax.swing.text.html.HTMLDocument;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +27,6 @@ import java.util.Map;
 public class FirstController {
 
     private final RestTemplate restTemplate;
-
-
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletResponse response) {
@@ -89,6 +86,8 @@ public class FirstController {
         model.put("victory","Victory");
         model.put("loose","Loose");
         model.put("halfVictory","Half Victory");
+        model.put("enemiesQuantity",1);
+
 
         Cookie[] cookies = request.getCookies();
         Cookie tokenCookie = null;
@@ -103,7 +102,6 @@ public class FirstController {
         final HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer "+tokenCookie.getValue());
 
-        //Create a new HttpEntity
         final HttpEntity<String> entity = new HttpEntity<String>(headers);
 
         ResponseEntity<List<HeroDto>> exchange = restTemplate.exchange("http://localhost:8080/heroes", HttpMethod.GET, entity, new ParameterizedTypeReference<List<HeroDto>>() {
@@ -117,9 +115,46 @@ public class FirstController {
         return new ModelAndView("add_battle",model);
     }
 
-    @RequestMapping(value = "/add_battle",method = RequestMethod.GET)
-    public String addBattle(@RequestParam("name") String name, @RequestParam("result") String result, @RequestParam("heroName") String hero){
+    @RequestMapping(value = "/add_battle",method = RequestMethod.POST)
+    public String addBattle(@RequestParam Map<String,String> allRequestParams){
         return "s";
+    }
+
+    @RequestMapping(value = "/add_battle/add_enemy",method = RequestMethod.POST)
+    public ModelAndView addEnemy(@RequestParam Map<String,String> allRequestParams,Map<String, Object> model,HttpServletRequest request){
+
+        model.put("victory","Victory");
+        model.put("loose","Loose");
+        model.put("halfVictory","Half Victory");
+        Integer g = Integer.valueOf(allRequestParams.get("enemiesQuantity"))+1;
+        model.put("enemiesQuantity",allRequestParams.get("enemiesQuantity")+1);
+
+
+
+        Cookie[] cookies = request.getCookies();
+        Cookie tokenCookie = null;
+        if (cookies != null) {
+            for (Cookie cookieInList : cookies) {
+                if (cookieInList.getName().equals("token")) {
+                    tokenCookie = cookieInList;
+                }
+            }
+        }
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer "+tokenCookie.getValue());
+
+        final HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        ResponseEntity<List<HeroDto>> exchange = restTemplate.exchange("http://localhost:8080/heroes", HttpMethod.GET, entity, new ParameterizedTypeReference<List<HeroDto>>() {
+        });
+
+        List<HeroDto> heroDtos = exchange.getBody();
+
+
+        model.put("heroes", heroDtos);
+
+        return new ModelAndView("add_battle",model);
     }
 
 }
