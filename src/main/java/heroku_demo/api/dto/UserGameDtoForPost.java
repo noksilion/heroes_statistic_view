@@ -14,13 +14,8 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class UserGameDtoForPost {
     @JsonProperty("user_id")
-    @NotNull(message = "user_id can not be null")
     private Integer userId;
-
     @JsonProperty("hero_id")
-    @NotNull(message = "hero_id can not be null")
     private Integer heroId;
-
-    @NotNull(message = "result can not be null")
     private Result result;
 }

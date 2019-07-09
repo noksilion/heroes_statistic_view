@@ -14,18 +14,33 @@
                 <th>Enemies Quantity - ${enemiesQuantity} </th>
             </tr>
             <tr>
-                <td>Enemy</td>
+                <td>You</td>
             </tr>
-
+            <tr>
+                <td>
+                    <label>
+                        <select name = "youResult" >
+                            <option>${loose}</option>
+                            <option>${victory}</option>
+                            <option>${halfVictory}</option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <select name = "youHero">
+                            <#list heroes as hero>
+                                <option >${hero.name}</option>
+                            </#list>
+                        </select>
+                    </label>
+                </td>
+            </tr>
             <input type="hidden" value= "${enemiesQuantity}" name="enemiesQuantity" >
 
             <#list 1..enemiesQuantity as tag>
                 <#include "enemy.ftl">
-                <#if tag == 3>
-                    <#break>
-                </#if>
             </#list>
-
 
         </table>
 

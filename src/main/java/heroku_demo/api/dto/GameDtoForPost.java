@@ -15,8 +15,5 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class GameDtoForPost {
-    @JsonProperty("players")
-    @Valid
-    @NotNull(message = "players can not be null")
-    private List<UserGameDtoForPost> userGameList;
+    private List<UserGameDtoForPost> players;
 }

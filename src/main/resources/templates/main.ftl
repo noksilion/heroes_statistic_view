@@ -7,8 +7,8 @@
 <body>
  <h1>Main Page</h1>
 
- <form name="student" action="/castles/get_all" method="get">
-     <input type="submit"/>
+ <form action="/view/add_battle" method="get">
+     <input type="submit" title="Add Battle"/>
  </form>
 
 </body>

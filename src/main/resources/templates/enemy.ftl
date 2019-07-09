@@ -1,7 +1,10 @@
 <tr>
+    <td>Enemy</td>
+</tr>
+<tr>
     <td>
         <label>
-            <select name = "result" >
+            <select name = "${listEnemyRequestParamsNames[tag-1].result}" >
                 <option>${loose}</option>
                 <option>${victory}</option>
                 <option>${halfVictory}</option>
@@ -10,7 +13,7 @@
     </td>
     <td>
         <label>
-            <select name = "heroName">
+            <select name = "${listEnemyRequestParamsNames[tag-1].heroName}">
                 <#list heroes as hero>
                     <option >${hero.name}</option>
                 </#list>
@@ -18,6 +21,6 @@
         </label>
     </td>
     <td>
-        <input type="text" name="name" /><br/>
+        <input type="text" name="${listEnemyRequestParamsNames[tag-1].name}" /><br/>
     </td>
 </tr>
