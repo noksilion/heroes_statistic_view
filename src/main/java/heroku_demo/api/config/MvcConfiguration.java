@@ -1,5 +1,7 @@
 package heroku_demo.api.config;
 
+        import heroku_demo.api.services.RestTemplateResponseErrorHandler;
+        import org.springframework.boot.web.client.RestTemplateBuilder;
         import org.springframework.context.annotation.Bean;
         import org.springframework.context.annotation.Configuration;
         import org.springframework.web.client.RestTemplate;
@@ -31,6 +33,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     RestTemplate restTemplate(){
-        return new RestTemplate();
+        return new RestTemplateBuilder()
+                .errorHandler(new RestTemplateResponseErrorHandler())
+                .build();
     }
 }

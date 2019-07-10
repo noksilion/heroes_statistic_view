@@ -61,4 +61,11 @@ public class FirstController {
         return new ModelAndView("add_battle",model);
     }
 
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    public String test(HttpServletRequest request){
+        HttpEntity entity = new HttpEntity(new HttpHeaders());
+        ResponseEntity<Integer> exchange = restTemplate.exchange("http://localhost:8080/users/logged_user_id", HttpMethod.GET, entity, new ParameterizedTypeReference<Integer>() {});
+        return "s";
+    }
+
 }
