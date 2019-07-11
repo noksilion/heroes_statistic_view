@@ -6,6 +6,11 @@
 </head>
 <body>
 <form modelAttribute="enemyBattles" method="post"  >
+
+        <#if (successMessage?has_content)>
+            <h3>${successMessage}</h3>
+        </#if>
+
         <table>
             <tr>
                 <th>Result</th>
@@ -20,9 +25,12 @@
                 <td>
                     <label>
                         <select name = "youResult" >
-                            <option>${loose}</option>
-                            <option>${victory}</option>
-                            <option>${halfVictory}</option>
+                            <#if youResult="loose"><option selected="selected">${loose}</option>
+                                <#else ><option>${loose}</option></#if>
+                            <#if youResult="halfVictory"><option selected="selected">${halfVictory}</option>
+                                <#else ><option>${halfVictory}</option></#if>
+                            <#if youResult="victory"><option selected="selected">${victory}</option>
+                                <#else ><option>${victory}</option></#if>
                         </select>
                     </label>
                 </td>
@@ -30,7 +38,8 @@
                     <label>
                         <select name = "youHero">
                             <#list heroes as hero>
-                                <option >${hero.name}</option>
+                                <#if youHero=hero.name><option selected="selected">${hero.name}</option>
+                                    <#else><option>${hero.name}</option></#if>
                             </#list>
                         </select>
                     </label>
@@ -44,7 +53,9 @@
 
         </table>
 
+
     <button type="submit" formaction="/add_battle/add_enemy" >Add new Enemy</button>
+    <#if enemiesQuantity gt 1><button type="submit" formaction="/add_battle/reduce_enemy" >Reduce Enemy</button></#if>
     <button type="submit" formaction="/add_battle">Add battle</button>
 </form>
 </body>

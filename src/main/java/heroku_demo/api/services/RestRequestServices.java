@@ -30,8 +30,7 @@ public class RestRequestServices {
         accountCredentials.setPassword(password);
         HttpEntity<AccountCredentials> request = new HttpEntity<>(accountCredentials);
 
-        ResponseEntity<TokenDto> exchange = restTemplate.exchange("http://localhost:8080/login", HttpMethod.POST, request, new ParameterizedTypeReference<TokenDto>() {
-        });
+        ResponseEntity<TokenDto> exchange = restTemplate.exchange("http://localhost:8080/login", HttpMethod.POST, request, new ParameterizedTypeReference<TokenDto>() {});
 
         response.addCookie(new Cookie("token",exchange.getBody().getToken()));
     }
