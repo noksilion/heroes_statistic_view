@@ -1,6 +1,7 @@
 package heroku_demo.api.controllers;
 
-import heroku_demo.api.dto.*;
+import heroku_demo.api.dto.GameDto;
+import heroku_demo.api.dto.UnapprovedGamesDto;
 import heroku_demo.api.exceptions.ForbiddenException;
 import heroku_demo.api.exceptions.RestApiException;
 import heroku_demo.api.services.ViewServices;
@@ -20,8 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -42,7 +43,6 @@ public class FirstController {
         return "login";
     }
 
-
     @RequestMapping(value = "/view/add_battle", method = RequestMethod.GET)
     public ModelAndView addBattle(HttpServletRequest request, Map<String, Object> model,@RequestParam (value = "successMessage", required = false) String successMessage) {
 
@@ -59,10 +59,9 @@ public class FirstController {
         try {
             restRequestServices.saveBattleResults(allRequestParams, request);
         } catch (RestApiException restException) {
-            //todo rename message
-            model.put("errorMessage",restException.getMessage());
-            model.put("allRequestParams",allRequestParams);
-            return new ModelAndView("redirect:" + "/add_battle/view_error",model);
+            int enemiesQuantity =  Integer.valueOf(allRequestParams.get("enemiesQuantity"));
+            model.put("reducingEnemy","");
+            return viewEnemies(allRequestParams, model, request, enemiesQuantity,"Error - "+restException.getMessage());
         } catch (ForbiddenException f) {
             return new ModelAndView("forbidden");
         }
@@ -70,47 +69,40 @@ public class FirstController {
         return new ModelAndView("redirect:" + "/view/add_battle",model);
     }
 
+    @RequestMapping(value = "/view_unapproved_games", method = RequestMethod.GET)
+    public ModelAndView viewUnapprovedGames(HttpServletRequest request, Map<String, Object> model) {
+        UnapprovedGamesDto unapprovedGames = restRequestServices.getUnapprovedGames(request);
+        List<GameDto> gameDtoList = unapprovedGames.getGameDtos();
+        model.put("gamesQuantity",gameDtoList.size());
+        int gameNumber = 0;
+        for(GameDto gameDto:gameDtoList){
+            gameNumber++;
+            if(gameNumber ==1){
+                model.put()
+            }
+            model.put("date"+gameNumber,gameDto.getDate());
+            model.put()
+        }
+        return new ModelAndView("redirect:" + "/view/add_battle",model);
+    }
+
     @RequestMapping(value = "/add_battle/add_enemy", method = RequestMethod.POST)
     public ModelAndView addEnemy(@RequestParam Map<String, String> allRequestParams, Map<String, Object> model, HttpServletRequest request) {
         int enemiesQuantity = Integer.valueOf(allRequestParams.get("enemiesQuantity")) + 1;
-        return viewEnemies(allRequestParams, model, request, enemiesQuantity);
+        return viewEnemies(allRequestParams, model, request, enemiesQuantity,null);
     }
 
     @RequestMapping(value = "/add_battle/reduce_enemy", method = RequestMethod.POST)
     public ModelAndView reduceEnemy(@RequestParam Map<String, String> allRequestParams, Map<String, Object> model, HttpServletRequest request) {
         int enemiesQuantity =  Integer.valueOf(allRequestParams.get("enemiesQuantity"))-1;
-        return viewEnemies(allRequestParams, model, request, enemiesQuantity);
-    }
-
-    @RequestMapping(value = "/add_battle/view_error", method = RequestMethod.POST)
-    public ModelAndView viewError(Map<String, Object> model, HttpServletRequest request
-            ,@RequestParam (value = "errorMessage", required = false) String errorMessage
-            ,@RequestParam(value = "allRequestParams", required = false)Map<String, String> allRequestParams) {
-
-        allRequestParams.put("successMessage",errorMessage);
-        int enemiesQuantity =  Integer.valueOf(allRequestParams.get("enemiesQuantity"));
-        return viewEnemies(allRequestParams, model, request, enemiesQuantity);
+        model.put("reducingEnemy","");
+        return viewEnemies(allRequestParams, model, request, enemiesQuantity,null);
     }
 
 
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test(HttpServletRequest request) {
-        HttpEntity entity = new HttpEntity(new HttpHeaders());
+    private ModelAndView viewEnemies(@RequestParam Map<String, String> allRequestParams, Map<String, Object> model, HttpServletRequest request, int enemiesQuantity,String message) {
         try {
-            ResponseEntity<Integer> exchange = restTemplate.exchange("http://localhost:8080/users/logged_user_id", HttpMethod.GET, entity, new ParameterizedTypeReference<Integer>() {
-            });
-        } catch (RestApiException restException) {
-            System.out.println("exceprion catched");
-        } catch (ForbiddenException f) {
-            return "forbidden";
-        }
-        return "s";
-    }
-
-    private ModelAndView viewEnemies(@RequestParam Map<String, String> allRequestParams, Map<String, Object> model, HttpServletRequest request, int enemiesQuantity) {
-        try {
-            viewServices.viewBattleWithAddedEnemy(request, model, enemiesQuantity,null,allRequestParams);
+            viewServices.viewBattleWithAddedEnemy(request, model, enemiesQuantity,message,allRequestParams);
         } catch (RestApiException restException) {
             System.out.println("exceprion catched");
         } catch (ForbiddenException f) {

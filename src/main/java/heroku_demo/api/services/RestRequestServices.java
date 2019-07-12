@@ -24,6 +24,17 @@ public class RestRequestServices {
 
     private final RestTemplate restTemplate;
 
+    public UnapprovedGamesDto getUnapprovedGames(HttpServletRequest request){
+        HttpHeaders headers = createHttpHeadersWithToken(request);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<UnapprovedGamesDto> response = restTemplate.exchange(
+                "http://localhost:8080/games/unapproved_games", HttpMethod.GET, entity, UnapprovedGamesDto.class);
+
+        return response.getBody();
+    }
+
     public void addTokenToResponse(String email,String password, HttpServletResponse response){
         AccountCredentials accountCredentials = new AccountCredentials();
         accountCredentials.setEmail(email);
@@ -76,11 +87,7 @@ public class RestRequestServices {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(json,headers);
 
-
         restTemplate.postForEntity("http://localhost:8080/games", entity, String.class);
-
-        int i =1;
-
     }
 
     public List<HeroDto> getAllHeroes(HttpServletRequest request){

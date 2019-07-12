@@ -1,13 +1,17 @@
+
+
+
 <tr>
     <td>Enemy</td>
 </tr>
+<#--listEnemyRequestParamsNames[tag-1].result-->
 <tr>
     <td>
         <label>
-            <select name = "${listEnemyRequestParamsNames[tag-1].result}" >
-                <#assign resultKey = listEnemyRequestParamsNames[tag-1].result/>
+            <select name = "${"enemy"+enemyNumber+"Result"}" >
+                <#assign resultKey = "enemy"+enemyNumber+"Result"/>
                 <#if enemyParamsNamesValues??>
-                    <#if tag != enemiesQuantity>
+                    <#if enemyNumber != enemiesQuantity || reducingEnemy ??>
                         <#if enemyParamsNamesValues[resultKey] = "Loose" ><option selected="selected">${loose}</option>
                             <#else ><option>${loose}</option></#if>
                         <#if enemyParamsNamesValues[resultKey] ="HalfVictory"><option selected="selected">${halfVictory}</option>
@@ -29,12 +33,12 @@
     </td>
     <td>
         <label>
-            <select name = "${listEnemyRequestParamsNames[tag-1].heroName}">
-                <#assign nameKey = listEnemyRequestParamsNames[tag-1].heroName/>
+            <select name = "${"enemy"+enemyNumber+"HeroName"}">
+                <#assign heroNameKey = "enemy"+enemyNumber+"HeroName"/>
                 <#list heroes as hero>
                     <#if enemyParamsNamesValues??>
-                        <#if tag != enemiesQuantity>
-                            <#if enemyParamsNamesValues[nameKey]=hero.name>
+                        <#if enemyNumber != enemiesQuantity || reducingEnemy ??>
+                            <#if enemyParamsNamesValues[heroNameKey]=hero.name>
                                 <option selected="selected">${hero.name}</option>
                             <#else>
                                 <option>${hero.name}</option>
@@ -51,14 +55,14 @@
     </td>
     <td>
         <#if enemyParamsNamesValues??>
-            <#if tag != enemiesQuantity>
-                <#assign resultKey = listEnemyRequestParamsNames[tag-1].name/>
-                <input type="text" name="${listEnemyRequestParamsNames[tag-1].name}" value="${enemyParamsNamesValues[resultKey]}" /><br/>
+            <#if enemyNumber != enemiesQuantity || reducingEnemy ??>
+                <#assign nameKey = "enemy"+enemyNumber+"Name"/>
+                <input type="text" name="${"enemy"+enemyNumber+"Name"}" value="${enemyParamsNamesValues[nameKey]}" /><br/>
             <#else>
-                    <input type="text" name="${listEnemyRequestParamsNames[tag-1].name}"/><br/>
+                    <input type="text" name="${"enemy"+enemyNumber+"Name"}"/><br/>
             </#if>
         <#else>
-            <input type="text" name="${listEnemyRequestParamsNames[tag-1].name}"/><br/>
+            <input type="text" name="${"enemy"+enemyNumber+"Name"}"/><br/>
         </#if>
     </td>
 </tr>

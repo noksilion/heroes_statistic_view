@@ -56,7 +56,7 @@ public class ViewServices {
         model.put("youResult",allRequestParams.get("youResult"));
         model.put("youHero",allRequestParams.get("youHero"));
         if(message!=null){
-            model.put("successMessage",message);
+            model.put("message",message);
         }
         EnemyRequestParamsNames[] arrEnemyRequestParamsNames = new EnemyRequestParamsNames[enemiesQuantity];
         Map<String,String> enemyParamsNamesValues = new HashMap<>();

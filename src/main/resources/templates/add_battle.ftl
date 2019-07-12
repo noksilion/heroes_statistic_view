@@ -7,8 +7,8 @@
 <body>
 <form modelAttribute="enemyBattles" method="post"  >
 
-        <#if (successMessage?has_content)>
-            <h3>${successMessage}</h3>
+        <#if message??>
+            <h3>${message}</h3>
         </#if>
 
         <table>
@@ -47,7 +47,7 @@
             </tr>
             <input type="hidden" value= "${enemiesQuantity}" name="enemiesQuantity" >
 
-            <#list 1..enemiesQuantity as tag>
+            <#list 1..enemiesQuantity as enemyNumber>
                 <#include "enemy.ftl">
             </#list>
 
