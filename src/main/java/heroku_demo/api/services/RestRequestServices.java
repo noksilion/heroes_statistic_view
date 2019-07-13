@@ -24,6 +24,16 @@ public class RestRequestServices {
 
     private final RestTemplate restTemplate;
 
+    public void approveGame(Integer gameId,HttpServletRequest request){
+        HttpHeaders headers = createHttpHeadersWithToken(request);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/games/approve_game")
+                .queryParam("user_game_id", gameId);
+        ResponseEntity<UnapprovedGamesDto> response = restTemplate.exchange(
+                builder.toUriString(), HttpMethod.GET, entity, UnapprovedGamesDto.class);
+    }
+
     public UnapprovedGamesDto getUnapprovedGames(HttpServletRequest request){
         HttpHeaders headers = createHttpHeadersWithToken(request);
         headers.setContentType(MediaType.APPLICATION_JSON);

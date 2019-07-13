@@ -15,7 +15,7 @@ import java.util.Map;
 public class ViewServices {
     private RestRequestServices restRequestServices;
 
-    public void viewBattle(HttpServletRequest request, Map<String, Object> model, Integer enemiesQuantity,String successMessage) {
+    public void viewBattle(HttpServletRequest request, Map<String, Object> model, Integer enemiesQuantity,String message) {
 
         model.put("victory", "Victory");
         model.put("loose", "Loose");
@@ -23,8 +23,8 @@ public class ViewServices {
         model.put("enemiesQuantity", enemiesQuantity);
         model.put("youResult","");
         model.put("youHero","");
-        if(successMessage!=null){
-            model.put("successMessage",successMessage);
+        if(message!=null){
+            model.put("message",message);
         }
         EnemyRequestParamsNames[] arrEnemyRequestParamsNames = new EnemyRequestParamsNames[enemiesQuantity];
         for (int i = 0; i < enemiesQuantity; i++) {
@@ -58,6 +58,7 @@ public class ViewServices {
         if(message!=null){
             model.put("message",message);
         }
+        //todo remove EnemyRequestParamsNames[]
         EnemyRequestParamsNames[] arrEnemyRequestParamsNames = new EnemyRequestParamsNames[enemiesQuantity];
         Map<String,String> enemyParamsNamesValues = new HashMap<>();
         for (int i = 0; i < enemiesQuantity; i++) {
