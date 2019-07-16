@@ -5,7 +5,7 @@
     <title>Add Battle</title>
 </head>
 <body>
-<form modelAttribute="enemyBattles" method="post"  >
+<form method="post"  >
 
         <#if message??>
             <h3>${message}</h3>
@@ -48,7 +48,7 @@
             <input type="hidden" value= "${enemiesQuantity}" name="enemiesQuantity" >
 
             <#list 1..enemiesQuantity as enemyNumber>
-                <#include "enemy.ftl">
+                <#include "templates/enemy.ftl">
             </#list>
 
         </table>

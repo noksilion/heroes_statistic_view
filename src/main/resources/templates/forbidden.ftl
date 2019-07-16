@@ -8,5 +8,6 @@
     <h1>You con not access this page because not Authorized</h1>
     <h2>Please Login</h2>
     <a href="/view/login">Login</a>
+    <a href="/view/signup">Signup</a>
     </body>
 </html>

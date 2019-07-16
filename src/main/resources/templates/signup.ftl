@@ -1,17 +1,17 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:form="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create new student</title>
+    <title>Signup</title>
 </head>
 <body>
 <#if message??>
     <h2>${message}</h2>
 </#if>
-<form action="/login" method="get">
+<form action="/signup" method="get">
     Email: <input type="text" name="email" /><br/>
     Password: <input type="text" name="password" /><br/>
+    UserName:<input type="text" name="userName" /><br/>
     <input type="submit"/>
 </form>
 </body>

@@ -51,10 +51,21 @@ public class RestRequestServices {
         accountCredentials.setPassword(password);
         HttpEntity<AccountCredentials> request = new HttpEntity<>(accountCredentials);
 
-        ResponseEntity<TokenDto> exchange = restTemplate.exchange("http://localhost:8080/login", HttpMethod.POST, request, new ParameterizedTypeReference<TokenDto>() {});
+        ResponseEntity<TokenDto> exchange = restTemplate.exchange("http://localhost:8080/login", HttpMethod.POST, request, TokenDto.class);
 
         response.addCookie(new Cookie("token",exchange.getBody().getToken()));
     }
+
+    public void addTokenToResponse(String email,String password, String userName, HttpServletResponse response){
+        UserDtoForPost userDtoForPost  = new UserDtoForPost(userName,email,password);
+
+        HttpEntity<UserDtoForPost> request = new HttpEntity<>(userDtoForPost);
+
+        ResponseEntity<TokenDto> exchange = restTemplate.exchange("http://localhost:8080/singup", HttpMethod.POST, request, new ParameterizedTypeReference<TokenDto>() {});
+
+        response.addCookie(new Cookie("token",exchange.getBody().getToken()));
+    }
+
 
     public Cookie getCookieByName(Cookie[] cookies,String cookieName){
         Cookie tokenCookie = null;

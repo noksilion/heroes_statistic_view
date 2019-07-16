@@ -19,7 +19,7 @@
             </tr>
 
             <#list 1..gamesQuantity as gameNumber>
-                <#include "unapproved_game.ftl">
+                <#include "templates/unapproved_game.ftl">
             </#list>
 
         </table>

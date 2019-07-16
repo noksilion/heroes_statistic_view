@@ -38,10 +38,10 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
         else if (httpResponse.getStatusCode().series() == CLIENT_ERROR) {
             if (httpResponse.getStatusCode() == HttpStatus.FORBIDDEN) {
                 BaseErrorDTO baseError = objectMapper.readValue(StreamUtils.copyToString(httpResponse.getBody(), Charset.defaultCharset()), BaseErrorDTO.class);
-                throw new ForbiddenException(baseError.getMessage());
+                throw new ForbiddenException(baseError.getDebugMessage());
             } else {
                 BaseErrorDTO baseError = objectMapper.readValue(StreamUtils.copyToString(httpResponse.getBody(), Charset.defaultCharset()), BaseErrorDTO.class);
-                throw new RestApiException (baseError.getMessage());
+                throw new RestApiException (baseError.getDebugMessage());
             }
         }
     }
