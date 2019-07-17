@@ -3,7 +3,6 @@ package heroku_demo.api.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import heroku_demo.api.dto.*;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -20,13 +19,16 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@AllArgsConstructor
 public class RestRequestServices {
 
     @Value("${restApplicationHost}")
     private String restApplicationHost;
 
     private final RestTemplate restTemplate;
+
+    public RestRequestServices(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public void approveGame(Integer gameId,HttpServletRequest request){
         HttpHeaders headers = createHttpHeadersWithToken(request);
