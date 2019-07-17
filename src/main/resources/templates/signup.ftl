@@ -14,5 +14,6 @@
     UserName:<input type="text" name="userName" /><br/>
     <input type="submit"/>
 </form>
+<a href="/" title="Go To Main Page"></a>
 </body>
 </html>

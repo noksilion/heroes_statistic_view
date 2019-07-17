@@ -1,9 +1,9 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns:form="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create new student</title>
+    <title>Login</title>
 </head>
 <body>
 <#if message??>
@@ -14,5 +14,6 @@
     Password: <input type="text" name="password" /><br/>
     <input type="submit"/>
 </form>
+<a href="/" title="Go To Main Page"></a>
 </body>
 </html>

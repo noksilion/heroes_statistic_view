@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Approve Game</title>
 </head>
 <body>
 
@@ -26,5 +26,6 @@
     <#else >
         <h2>${noGamesMessage}</h2>
     </#if>
+    <a href="/" title="Go To Main Page"></a>
 </body>
 </html>

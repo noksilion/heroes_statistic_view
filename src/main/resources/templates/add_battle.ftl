@@ -58,5 +58,6 @@
     <#if enemiesQuantity gt 1><button type="submit" formaction="/add_battle/reduce_enemy" >Reduce Enemy</button></#if>
     <button type="submit" formaction="/add_battle">Add battle</button>
 </form>
+<a href="/" title="Go To Main Page"></a>
 </body>
 </html>
