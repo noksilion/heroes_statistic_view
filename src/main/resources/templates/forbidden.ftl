@@ -9,6 +9,6 @@
     <h2>Please Login</h2>
     <a href="/view/login">Login</a>
     <a href="/view/signup">Signup</a>
-    <a href="/" title="Go To Main Page"></a>
+    <a href="/" title="Go To Main Page">Go To Main Page</a>
 </body>
 </html>

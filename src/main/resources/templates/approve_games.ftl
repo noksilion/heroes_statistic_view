@@ -26,6 +26,6 @@
     <#else >
         <h2>${noGamesMessage}</h2>
     </#if>
-    <a href="/" title="Go To Main Page"></a>
+    <a href="/" title="Go To Main Page">Go To Main Page</a>
 </body>
 </html>

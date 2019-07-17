@@ -14,6 +14,6 @@
     Password: <input type="text" name="password" /><br/>
     <input type="submit"/>
 </form>
-<a href="/" title="Go To Main Page"></a>
+<a href="/" title="Go To Main Page">Go To Main Page</a>
 </body>
 </html>
