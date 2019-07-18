@@ -19,13 +19,19 @@
      </tr>
      <tr>
          <td>
-             <button type="submit" formaction="/view/add_battle" formmethod="get">Add Battle</button>
+             <form action="/view/add_battle" method="get">
+                 <button type="submit" >Add Battle</button>
+             </form>
          </td>
          <td>
-             <button type="submit" formaction="/view/statistic" formmethod="get">Get Statistic</button>
+             <form action="/view/statistic" method="get">
+                 <button type="submit">Get Statistic</button>
+             </form>
          </td>
          <td>
-             <button type="submit" formmethod="get" formaction="/view_unapproved_games">Approve Game</button>
+             <form action="/view_unapproved_games" method="get">
+                 <button type="submit">Approve Game</button>
+             </form>
          </td>
      </tr>
      <tr>

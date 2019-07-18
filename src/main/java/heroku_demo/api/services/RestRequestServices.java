@@ -47,7 +47,7 @@ public class RestRequestServices {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<UnapprovedGamesDto> response = restTemplate.exchange(
-                restApplicationHost+"games/unapproved_games", HttpMethod.GET, entity, UnapprovedGamesDto.class);
+                restApplicationHost+"/games/unapproved_games", HttpMethod.GET, entity, UnapprovedGamesDto.class);
 
         return response.getBody();
     }
@@ -58,7 +58,7 @@ public class RestRequestServices {
         accountCredentials.setPassword(password);
         HttpEntity<AccountCredentials> request = new HttpEntity<>(accountCredentials);
 
-        ResponseEntity<TokenDto> exchange = restTemplate.exchange(restApplicationHost+"login", HttpMethod.POST, request, TokenDto.class);
+        ResponseEntity<TokenDto> exchange = restTemplate.exchange(restApplicationHost+"/login", HttpMethod.POST, request, TokenDto.class);
 
         response.addCookie(new Cookie("token",exchange.getBody().getToken()));
     }
@@ -68,7 +68,7 @@ public class RestRequestServices {
 
         HttpEntity<UserDtoForPost> request = new HttpEntity<>(userDtoForPost);
 
-        ResponseEntity<TokenDto> exchange = restTemplate.exchange(restApplicationHost+"singup", HttpMethod.POST, request, new ParameterizedTypeReference<TokenDto>() {});
+        ResponseEntity<TokenDto> exchange = restTemplate.exchange(restApplicationHost+"/singup", HttpMethod.POST, request, new ParameterizedTypeReference<TokenDto>() {});
 
         response.addCookie(new Cookie("token",exchange.getBody().getToken()));
     }
@@ -115,24 +115,24 @@ public class RestRequestServices {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(json,headers);
 
-        restTemplate.postForEntity(restApplicationHost+"games", entity, String.class);
+        restTemplate.postForEntity(restApplicationHost+"/games", entity, String.class);
     }
 
     public List<HeroDto> getAllHeroes(HttpServletRequest request){
         HttpEntity entity = new HttpEntity(createHttpHeadersWithToken(request));
-        ResponseEntity<List<HeroDto>> exchange = restTemplate.exchange(restApplicationHost+"heroes", HttpMethod.GET, entity, new ParameterizedTypeReference<List<HeroDto>>() {});
+        ResponseEntity<List<HeroDto>> exchange = restTemplate.exchange(restApplicationHost+"/heroes", HttpMethod.GET, entity, new ParameterizedTypeReference<List<HeroDto>>() {});
         return exchange.getBody();
     }
 
     public Integer getLoggedUserId(HttpServletRequest request){
         HttpEntity entity = new HttpEntity(createHttpHeadersWithToken(request));
-        ResponseEntity<Integer> exchange = restTemplate.exchange(restApplicationHost+"users/logged_user_id", HttpMethod.GET, entity, new ParameterizedTypeReference<Integer>() {});
+        ResponseEntity<Integer> exchange = restTemplate.exchange(restApplicationHost+"/users/logged_user_id", HttpMethod.GET, entity, new ParameterizedTypeReference<Integer>() {});
         return exchange.getBody();
     }
 
     public Integer getUserIdByEmail(HttpServletRequest request,String email){
         HttpEntity entity = new HttpEntity(createHttpHeadersWithToken(request));
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(restApplicationHost+"users/user_id_by_email")
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(restApplicationHost+"/users/user_id_by_email")
                 .queryParam("email", email);
         ResponseEntity<Integer> exchange = restTemplate.exchange(builder.buildAndExpand(new HashMap<>()).toUri(), HttpMethod.GET, entity, new ParameterizedTypeReference<Integer>() {});
         return exchange.getBody();
