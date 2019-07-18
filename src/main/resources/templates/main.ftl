@@ -25,7 +25,7 @@
              <button type="submit" formaction="/view/statistic" formmethod="get">Get Statistic</button>
          </td>
          <td>
-             <button type="submit" formmethod="get" formaction="/view_unapproved_games">Get Statistic</button>
+             <button type="submit" formmethod="get" formaction="/view_unapproved_games">Approve Game</button>
          </td>
      </tr>
      <tr>
