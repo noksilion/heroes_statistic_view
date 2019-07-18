@@ -41,7 +41,7 @@ public class BattleController {
             model.put("reducingEnemy","");
             return viewEnemies(allRequestParams, model, request, enemiesQuantity,"Error - "+restException.getMessage());
         } catch (ForbiddenException f) {
-            return new ModelAndView("forbidden");
+            return new ModelAndView("forbidden",model);
         }
         model.put("message","Game Successfully Added");
         return new ModelAndView("redirect:" + "/view/add_battle",model);

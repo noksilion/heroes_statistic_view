@@ -1,8 +1,10 @@
 package heroku_demo.api.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import heroku_demo.api.services.RestRequestServices;
 import heroku_demo.api.services.RestTemplateResponseErrorHandler;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -11,6 +13,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import javax.management.MXBean;
+import javax.servlet.Filter;
+import java.util.ArrayList;
 
 @Configuration
 @EnableWebMvc
@@ -43,4 +49,27 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     ObjectMapper objectMapper(){
         return new ObjectMapper();
     }
+
+    @Bean
+    public FilterRegistrationBean someFilterRegistration() {
+
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(someFilter());
+        registration.addUrlPatterns("/view/add_battle","/add_battle");
+        registration.setName("tokenFilter");
+        registration.setOrder(1);
+        return registration;
+    }
+
+    @Bean(name = "tokenFilter")
+    public Filter someFilter() {
+        return new TokenFilter(restRequestServices());
+    }
+
+    @Bean
+    public RestRequestServices restRequestServices(){
+        return new RestRequestServices(restTemplate());
+    }
+
+
 }
