@@ -15,17 +15,17 @@
      <tr>
          <th>Add Battle</th>
          <th>View Statistic</th>
+         <th>Approve Games</th>
      </tr>
      <tr>
          <td>
-             <form action="/view/add_battle" method="get">
-                 <button type="submit" >Add Battle</button>
-             </form>
+             <button type="submit" formaction="/view/add_battle" formmethod="get">Add Battle</button>
          </td>
          <td>
-             <form action="/view/statistic" method="get">
-                 <button type="submit">Get Statistic</button>
-             </form>
+             <button type="submit" formaction="/view/statistic" formmethod="get">Get Statistic</button>
+         </td>
+         <td>
+             <button type="submit" formmethod="get" formaction="/view_unapproved_games">Get Statistic</button>
          </td>
      </tr>
      <tr>
