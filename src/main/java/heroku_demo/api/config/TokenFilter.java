@@ -15,23 +15,43 @@ import java.io.IOException;
 @Component
 @Order(1)
 
-public class TokenFilter extends OncePerRequestFilter {
+public class TokenFilter implements Filter {
 
     private final RestRequestServices restRequestServices;
 
-    @Value("${restApplicationHost}")
-    private String restApplicationHost;
+    @Value("${applicationHost}")
+    private String applicationHost;
 
     public TokenFilter(RestRequestServices restRequestServices) {
         this.restRequestServices = restRequestServices;
     }
 
+
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        Cookie[] cookies = request.getCookies();
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        Cookie[] cookies = httpServletRequest.getCookies();
         Cookie tokenCookie = restRequestServices.getCookieByName(cookies, "token");
         if(tokenCookie == null){
-            response.sendRedirect(restApplicationHost+"/forbidden?message=Forbidden");
+            httpServletResponse.sendRedirect(applicationHost+"/forbidden?message=Forbidden");
         }
+        chain.doFilter(request,response);
     }
+    @Override
+    public void destroy() {
+    }
+
+//    @Override
+//    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+//        Cookie[] cookies = request.getCookies();
+//        Cookie tokenCookie = restRequestServices.getCookieByName(cookies, "token");
+//        if(tokenCookie == null){
+//            response.sendRedirect(applicationHost+"/forbidden?message=Forbidden");
+//        }
+//    }
 }

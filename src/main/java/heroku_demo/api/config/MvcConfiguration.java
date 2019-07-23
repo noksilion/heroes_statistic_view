@@ -54,7 +54,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     public FilterRegistrationBean someFilterRegistration() {
 
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(someFilter());
+        registration.setFilter(tokenFilter());
         registration.addUrlPatterns("/view/add_battle","/add_battle");
         registration.setName("tokenFilter");
         registration.setOrder(1);
@@ -62,7 +62,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean(name = "tokenFilter")
-    public Filter someFilter() {
+    public Filter tokenFilter() {
         return new TokenFilter(restRequestServices());
     }
 
