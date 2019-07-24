@@ -1,5 +1,5 @@
 
-    <tr>
+    <tr class ="trFromServer">
         <td></td>
         <td>
             Games Quantity
@@ -9,7 +9,7 @@
             ${gamesQuantity}
         </td>
     </tr>
-    <tr>
+    <tr class ="trFromServer">
         <td></td>
         <td>
            Wins Quantity
@@ -19,7 +19,7 @@
             ${winsQuantity}
         </td>
     </tr>
-    <tr>
+    <tr class ="trFromServer">
         <td></td>
         <td>
             Loose Quantity
@@ -29,7 +29,7 @@
             ${looseQuantity}
         </td>
     </tr>
-    <tr>
+    <tr class ="trFromServer">
         <td></td>
         <td>
             Victory Percent

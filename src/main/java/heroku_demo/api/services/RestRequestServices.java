@@ -31,8 +31,10 @@ public class RestRequestServices {
         this.restTemplate = restTemplate;
     }
 
-    public GameStatistic getStatistic(HttpServletRequest request,Integer userId,Integer heroId){
+    public GameStatistic getStatistic(HttpServletRequest request,String userEmail,Integer heroId){
+
         HttpHeaders headers = createHttpHeadersWithToken(request);
+        Integer userId = getUserIdByEmail(request,userEmail);
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(headers);
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(restApplicationHost+"/stats")

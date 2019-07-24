@@ -6,19 +6,19 @@
 </head>
 <body>
 
-    <table id="statistic2Params">
+    <table>
         <tbody >
             <tr>
                 <th>V/S</th>
-                <th>User Name</th>
+                <th>Enemy Email</th>
                 <th>on</th>
-                <th>You Hero</th>
+                <th>Enemy Hero</th>
             </tr>
-            <tr class="lastTR">
+            <tr id="statisticBy2ParamsLastTr">
                 <td></td>
                 <td>
                     <label>
-                        <input id="UserName2Params" type="text">
+                        <input id="Email2Params" type="text">
                     </label>
                 </td>
                 <td></td>
@@ -35,11 +35,31 @@
         </tbody>
     </table>
 
-<button type="button" onclick="loadStatsHtml2Params('http://localhost:8085/get_stats_html','${token}')">Request data</button>
+    <button type="button" onclick="loadStatsHtml2Params()">Request data</button>
 
+
+    <table>
+        <tbody >
+        <tr>
+            <th>V/S</th>
+            <th>Enemy Email</th>
+        </tr>
+        <tr id="statisticByEmailLastTr">
+            <td></td>
+            <td>
+                <label>
+                    <input id="EmailParam" type="text">
+                </label>
+            </td>
+        </tr >
+        </tbody>
+    </table>
+
+    <button type="button" onclick="loadStatsHtmlByEmail()">Request data</button>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="/js/loadStatsHtml.js"></script>
+    <script src="/js/loadStatsHtml.js"></script>
+
 
 </body>
 </html>

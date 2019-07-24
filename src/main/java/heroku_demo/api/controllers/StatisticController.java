@@ -40,11 +40,11 @@ public class StatisticController {
     }
 
     @RequestMapping(value = "/get_stats_html", method = RequestMethod.GET)
-    public ModelAndView getStats(@RequestParam(name = "userId",required = false) Integer userId,
+    public ModelAndView getStats(@RequestParam(name = "userEmail",required = false) String userEmail,
                                  @RequestParam(name = "heroId",required = false) Integer heroId,
                                  HttpServletRequest request,
                                  Map<String, Object> model) {
-        GameStatistic gameStatistic = restRequestServices.getStatistic(request,userId,heroId);
+        GameStatistic gameStatistic = restRequestServices.getStatistic(request,userEmail,heroId);
         model.put("gamesQuantity",gameStatistic.getGamesCount().toString());
         model.put("winsQuantity",gameStatistic.getWinsCount().toString());
         model.put("looseQuantity",gameStatistic.getLooseCount().toString());
