@@ -31,6 +31,18 @@ public class RestRequestServices {
         this.restTemplate = restTemplate;
     }
 
+    public GameStatistic getStatistic(HttpServletRequest request,Integer userId,Integer heroId){
+        HttpHeaders headers = createHttpHeadersWithToken(request);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(restApplicationHost+"/stats")
+                .queryParam("userId", userId)
+                .queryParam("heroId", heroId);
+        ResponseEntity<GameStatistic> response = restTemplate.exchange(
+                builder.toUriString(), HttpMethod.GET, entity, GameStatistic.class);
+        return response.getBody();
+    }
+
     public void approveGame(Integer gameId,HttpServletRequest request){
         HttpHeaders headers = createHttpHeadersWithToken(request);
         headers.setContentType(MediaType.APPLICATION_JSON);

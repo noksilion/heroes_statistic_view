@@ -1,11 +1,13 @@
 package heroku_demo.api.controllers;
 
+import heroku_demo.api.dto.GameStatistic;
 import heroku_demo.api.dto.HeroDto;
 import heroku_demo.api.services.RestRequestServices;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -35,6 +37,20 @@ public class StatisticController {
         Cookie cookie = restRequestServices.getCookieByName(cookies,"token");
         model.put("token",cookie.getValue());
         return new ModelAndView("statistic",model);
+    }
+
+    @RequestMapping(value = "/get_stats_html", method = RequestMethod.GET)
+    public ModelAndView getStats(@RequestParam(name = "userId",required = false) Integer userId,
+                                 @RequestParam(name = "heroId",required = false) Integer heroId,
+                                 HttpServletRequest request,
+                                 Map<String, Object> model) {
+        GameStatistic gameStatistic = restRequestServices.getStatistic(request,userId,heroId);
+        model.put("gamesQuantity",gameStatistic.getGamesCount().toString());
+        model.put("winsQuantity",gameStatistic.getWinsCount().toString());
+        model.put("looseQuantity",gameStatistic.getLooseCount().toString());
+        model.put("victoryPercent",gameStatistic.getWinPercent().toString());
+
+        return new ModelAndView("templates/stats",model);
     }
 
 }

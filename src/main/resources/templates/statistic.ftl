@@ -5,61 +5,41 @@
     <title>Statistic</title>
 </head>
 <body>
-<div id="table" >
-    <table >
-        <tr>
-            <th>V/S</th>
-            <th>User Name</th>
-            <th>on</th>
-            <th>You Hero</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <label>
-                    <input id="UserName2Params" type="text">
-                </label>
-            </td>
-            <td></td>
-            <td>
-                <label>
-                    <select id = "EnemyHero">
-                        <#list heroes as hero>
-                           <option>${hero.name}</option>
-                        </#list>
-                    </select>
-                </label>
-            </td>
-        </tr>
 
+    <table id="statistic2Params">
+        <tbody >
+            <tr>
+                <th>V/S</th>
+                <th>User Name</th>
+                <th>on</th>
+                <th>You Hero</th>
+            </tr>
+            <tr class="lastTR">
+                <td></td>
+                <td>
+                    <label>
+                        <input id="UserName2Params" type="text">
+                    </label>
+                </td>
+                <td></td>
+                <td>
+                    <label>
+                        <select id = "EnemyHero2Params">
+                            <#list heroes as hero>
+                               <option value=${hero.id}>${hero.name}</option>
+                            </#list>
+                        </select>
+                    </label>
+                </td>
+            </tr >
+        </tbody>
     </table>
-</div>
+
+<button type="button" onclick="loadStatsHtml2Params('http://localhost:8085/get_stats_html','${token}')">Request data</button>
 
 
-<button type="button" onclick="loadDoc('http://localhost:8080/stats','${token}')">Request data</button>
-
-<p id="demo"></p>
-
-<script type="text/javascript">
-    function loadDoc(url,token) {
-        var http = new XMLHttpRequest();
-        var str = 'Bearer ';
-        var tokenString = str.concat(token);
-        var userName = document.getElementById("UserName2Params").value;
-        var heroName = document.getElementById("EnemyHero").value;
-        var params = 'userId=1&heroId=1';
-        http.open('POST', url, true);
-
-//Send the proper header information along with the request
-        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        http.setRequestHeader("Authorization",tokenString);
-
-        http.onreadystatechange = function() {//Call a function when the state changes.
-            alert(http.responseText);
-        }
-        http.send(params);
-    }
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/js/loadStatsHtml.js"></script>
 
 </body>
 </html>
