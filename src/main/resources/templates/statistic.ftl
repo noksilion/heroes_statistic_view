@@ -14,7 +14,7 @@
                 <th>V/S</th>
                 <th>Enemy Email</th>
                 <th>on</th>
-                <th>Enemy Hero</th>
+                <th>You Hero</th>
             </tr>
             <tr id="statisticBy2ParamsLastTr">
                 <td></td>
