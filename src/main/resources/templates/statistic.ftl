@@ -38,13 +38,15 @@
     <button type="button" onclick="loadStatsHtml2Params()">Request data</button>
 
 
+
+
     <table>
         <tbody >
         <tr>
             <th>V/S</th>
             <th>Enemy Email</th>
         </tr>
-        <tr id="statisticByEmailLastTr">
+        <tr id=" statisticByEmailLastTr">
             <td></td>
             <td>
                 <label>
@@ -56,6 +58,42 @@
     </table>
 
     <button type="button" onclick="loadStatsHtmlByEmail()">Request data</button>
+
+    <table>
+        <tbody >
+            <tr>
+                <th>Win Rate</th>
+                <th>Hero Name</th>
+            </tr>
+            <tr id="statisticByHeroLastTr">
+                <td></td>
+                <td>
+                    <label>
+                        <select id = "YouHeroParam">
+                            <#list heroes as hero>
+                                <option value=${hero.id}>${hero.name}</option>
+                            </#list>
+                        </select>
+                    </label>
+                </td>
+            </tr >
+        </tbody>
+    </table>
+
+
+    <button type="button" onclick="loadStatsHtmlByHero()">Request data</button>
+
+
+    <table>
+        <tbody >
+        <tr id="globalWinRateTr">
+            <th></th>
+            <th>Global Win Rate</th>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="button" onclick="loadStatsHtmlGlobalUserWinRate()">Request data</button>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="/js/loadStatsHtml.js"></script>

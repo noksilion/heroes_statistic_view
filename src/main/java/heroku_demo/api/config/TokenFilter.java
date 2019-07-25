@@ -40,18 +40,11 @@ public class TokenFilter implements Filter {
         if(tokenCookie == null){
             httpServletResponse.sendRedirect(applicationHost+"/forbidden?message=Forbidden");
         }
-        chain.doFilter(request,response);
+        else {
+            chain.doFilter(request, response);
+        }
     }
     @Override
     public void destroy() {
     }
-
-//    @Override
-//    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//        Cookie[] cookies = request.getCookies();
-//        Cookie tokenCookie = restRequestServices.getCookieByName(cookies, "token");
-//        if(tokenCookie == null){
-//            response.sendRedirect(applicationHost+"/forbidden?message=Forbidden");
-//        }
-//    }
 }
