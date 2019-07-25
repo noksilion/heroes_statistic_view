@@ -55,7 +55,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(tokenFilter());
-        registration.addUrlPatterns("/view/add_battle","/add_battle");
+        registration.addUrlPatterns("/view/add_battle","/add_battle","/approve_one_game","/view_unapproved_games","/","/view/statistic","/statistic","/get_stats_html");
         registration.setName("tokenFilter");
         registration.setOrder(1);
         return registration;
