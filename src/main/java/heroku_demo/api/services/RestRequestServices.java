@@ -31,13 +31,9 @@ public class RestRequestServices {
         this.restTemplate = restTemplate;
     }
 
-    public GameStatistic getStatistic(HttpServletRequest request,String userEmail,Integer heroId){
+    public GameStatistic getStatistic(HttpServletRequest request,Integer userId,Integer heroId){
 
         HttpHeaders headers = createHttpHeadersWithToken(request);
-        Integer userId = null;
-        if (userEmail != null){
-            userId = getUserIdByEmail(request,userEmail);
-        }
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(headers);
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(restApplicationHost+"/stats")
@@ -138,6 +134,12 @@ public class RestRequestServices {
     public List<HeroDto> getAllHeroes(HttpServletRequest request){
         HttpEntity entity = new HttpEntity(createHttpHeadersWithToken(request));
         ResponseEntity<List<HeroDto>> exchange = restTemplate.exchange(restApplicationHost+"/heroes", HttpMethod.GET, entity, new ParameterizedTypeReference<List<HeroDto>>() {});
+        return exchange.getBody();
+    }
+
+    public List<UserDtoViewAllUsers> getAllUsers(HttpServletRequest request){
+        HttpEntity entity = new HttpEntity(createHttpHeadersWithToken(request));
+        ResponseEntity<List<UserDtoViewAllUsers>> exchange = restTemplate.exchange(restApplicationHost+"/users/all_users", HttpMethod.GET, entity, new ParameterizedTypeReference<List<UserDtoViewAllUsers>>() {});
         return exchange.getBody();
     }
 

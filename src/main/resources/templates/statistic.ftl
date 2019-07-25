@@ -5,7 +5,9 @@
     <title>Statistic</title>
 </head>
 <body>
-
+    <div>
+        <h2 id="statisticBy2ParamsError"></h2>
+    </div>
     <table>
         <tbody >
             <tr>
@@ -18,7 +20,11 @@
                 <td></td>
                 <td>
                     <label>
-                        <input id="Email2Params" type="text">
+                        <select id = "Email2Params">
+                            <#list users as user>
+                                <option value=${user.id}>${user.email}</option>
+                            </#list>
+                        </select>
                     </label>
                 </td>
                 <td></td>
@@ -35,29 +41,39 @@
         </tbody>
     </table>
 
-    <button type="button" onclick="loadStatsHtml2Params()">Request data</button>
+    <button type="button" onclick="loadStatsHtml2Params('${link}')">Request data</button>
 
 
 
-
+    <div>
+        <h2 id="statisticByEmailError"></h2>
+    </div>
     <table>
         <tbody >
         <tr>
             <th>V/S</th>
             <th>Enemy Email</th>
         </tr>
-        <tr id=" statisticByEmailLastTr">
+        <tr id="statisticByEmailLastTr">
             <td></td>
             <td>
                 <label>
-                    <input id="EmailParam" type="text">
+                    <select id = "EmailParam">
+                        <#list users as user>
+                            <option value=${user.id}>${user.email}</option>
+                        </#list>
+                    </select>
                 </label>
             </td>
         </tr >
         </tbody>
     </table>
 
-    <button type="button" onclick="loadStatsHtmlByEmail()">Request data</button>
+    <button type="button" onclick="loadStatsHtmlByEmail('${link}')">Request data</button>
+
+    <div>
+        <h2 id="statisticByHeroError"></h2>
+    </div>
 
     <table>
         <tbody >
@@ -81,8 +97,12 @@
     </table>
 
 
-    <button type="button" onclick="loadStatsHtmlByHero()">Request data</button>
+    <button type="button" onclick="loadStatsHtmlByHero('${link}')">Request data</button>
 
+
+    <div>
+        <h2 id="globalWinRateError"></h2>
+    </div>
 
     <table>
         <tbody >
@@ -93,7 +113,10 @@
         </tbody>
     </table>
 
-    <button type="button" onclick="loadStatsHtmlGlobalUserWinRate()">Request data</button>
+    <button type="button" onclick="loadStatsHtmlGlobalUserWinRate('${link}')">Request data</button>
+
+    <br>
+    <a href="/" title="Go To Main Page">Go To Main Page</a>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="/js/loadStatsHtml.js"></script>
