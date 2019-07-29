@@ -15,37 +15,6 @@ import java.util.Map;
 public class ViewServices {
     private RestRequestServices restRequestServices;
 
-    public void viewBattle(HttpServletRequest request, Map<String, Object> model, Integer enemiesQuantity,String message) {
-
-        model.put("victory", "Victory");
-        model.put("loose", "Loose");
-        model.put("halfVictory", "Half Victory");
-        model.put("enemiesQuantity", enemiesQuantity);
-        model.put("youResult","");
-        model.put("youHero","");
-        if(message!=null){
-            model.put("message",message);
-        }
-        EnemyRequestParamsNames[] arrEnemyRequestParamsNames = new EnemyRequestParamsNames[enemiesQuantity];
-        for (int i = 0; i < enemiesQuantity; i++) {
-            String heroNameParam = "enemy" + (i+1) + "HeroName";
-            String nameParam = "enemy" + (i+1) + "Name";
-            String resultParam = "enemy" + (i+1) + "Result";
-            arrEnemyRequestParamsNames[i] = (EnemyRequestParamsNames.builder()
-                    .heroName(heroNameParam)
-                    .name(nameParam)
-                    .result(resultParam)
-                    .build()
-            );
-            model.put(heroNameParam,"");
-            model.put(nameParam,"");
-            model.put(resultParam,"");
-        }
-        model.put("listEnemyRequestParamsNames", arrEnemyRequestParamsNames);
-        List<HeroDto> heroDtos = restRequestServices.getAllHeroes(request);
-        model.put("heroes", heroDtos);
-
-    }
 
     public void viewBattleWithAddedEnemy(HttpServletRequest request, Map<String, Object> model, Integer enemiesQuantity,String message,Map<String, String> allRequestParams) {
 

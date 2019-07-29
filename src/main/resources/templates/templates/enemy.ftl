@@ -1,68 +1,32 @@
-
-
-
-<tr>
+<tr class="${"enemy"+enemyNumber+"Tr"} enemy">
     <td>Enemy</td>
 </tr>
-<#--listEnemyRequestParamsNames[tag-1].result-->
-<tr>
+<tr id="${"enemy"+enemyNumber+"Tr"}" class="${"enemy"+enemyNumber+"Tr"}  enemy">
     <td>
         <label>
-            <select name = "${"enemy"+enemyNumber+"Result"}" >
-                <#assign resultKey = "enemy"+enemyNumber+"Result"/>
-                <#if enemyParamsNamesValues??>
-                    <#if enemyNumber != enemiesQuantity || reducingEnemy ??>
-                        <#if enemyParamsNamesValues[resultKey] = "Loose" ><option selected="selected">${loose}</option>
-                            <#else ><option>${loose}</option></#if>
-                        <#if enemyParamsNamesValues[resultKey] ="HalfVictory"><option selected="selected">${halfVictory}</option>
-                            <#else ><option>${halfVictory}</option></#if>
-                        <#if enemyParamsNamesValues[resultKey] ="Victory"><option selected="selected">${victory}</option>
-                            <#else ><option>${victory}</option></#if>
-                    <#else>
-                        <option>${loose}</option>
-                        <option>${halfVictory}</option>
-                        <option>${victory}</option>
-                    </#if>
-                <#else>
-                    <option>${loose}</option>
-                    <option>${halfVictory}</option>
-                    <option>${victory}</option>
-                </#if>
+            <select id = "${"enemy"+enemyNumber+"Result"}" >
+                <option value="LOOSE">${loose}</option>
+                <option value="HALF_VICTORY">${halfVictory}</option>
+                <option value="VICTORY">${victory}</option>
             </select>
         </label>
     </td>
     <td>
         <label>
-            <select name = "${"enemy"+enemyNumber+"HeroName"}">
-                <#assign heroNameKey = "enemy"+enemyNumber+"HeroName"/>
+            <select id = "${"enemy"+enemyNumber+"HeroName"}">
                 <#list heroes as hero>
-                    <#if enemyParamsNamesValues??>
-                        <#if enemyNumber != enemiesQuantity || reducingEnemy ??>
-                            <#if enemyParamsNamesValues[heroNameKey]=hero.name>
-                                <option selected="selected">${hero.name}</option>
-                            <#else>
-                                <option>${hero.name}</option>
-                            </#if>
-                        <#else>
-                            <option>${hero.name}</option>
-                        </#if>
-                    <#else>
-                        <option>${hero.name}</option>
-                    </#if>
+                    <option value="${hero.id}">${hero.name}</option>
                 </#list>
             </select>
         </label>
     </td>
     <td>
-        <#if enemyParamsNamesValues??>
-            <#if enemyNumber != enemiesQuantity || reducingEnemy ??>
-                <#assign nameKey = "enemy"+enemyNumber+"Name"/>
-                <input type="text" name="${"enemy"+enemyNumber+"Name"}" value="${enemyParamsNamesValues[nameKey]}" /><br/>
-            <#else>
-                    <input type="text" name="${"enemy"+enemyNumber+"Name"}"/><br/>
-            </#if>
-        <#else>
-            <input type="text" name="${"enemy"+enemyNumber+"Name"}"/><br/>
-        </#if>
+        <label>
+            <select id = "${"enemy"+enemyNumber+"EmailParam"}">
+                <#list users as user>
+                    <option value=${user.id}>${user.email}</option>
+                </#list>
+            </select>
+        </label>
     </td>
 </tr>
