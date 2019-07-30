@@ -1,5 +1,4 @@
 function test() {
-
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
@@ -9,5 +8,4 @@ function test() {
         console.log(xhr.response);
     };
     xhr.send();
-
 }

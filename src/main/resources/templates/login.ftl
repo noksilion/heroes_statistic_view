@@ -15,10 +15,5 @@
     <input type="submit"/>
 </form>
 <a href="/" title="Go To Main Page">Go To Main Page</a>
-
-<button type="button" onclick="test()">Request data</button>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="/js/test.js"></script>
 </body>
 </html>
