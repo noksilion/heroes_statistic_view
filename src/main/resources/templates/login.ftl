@@ -4,16 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-<#if message??>
-    <h2>${message}</h2>
-</#if>
-<form action="/login" method="get">
-    Email: <input type="text" name="email" /><br/>
-    Password: <input type="text" name="password" /><br/>
-    <input type="submit"/>
-</form>
-<a href="/" title="Go To Main Page">Go To Main Page</a>
+<div class="container">
+
+    <div class="staticInfo">
+        <div class ="hommLogo">
+            <img src="/img/homm.png" alt="image"/>
+        </div>
+
+        <div class="introInfo">
+            <img src="/img/introInfo.png" alt="introInfo">
+        </div>
+    </div>
+
+
+    <div class ="login-signup" >
+        <h3 id="textTitle">Войти</h3>
+        <input id="Email" type="text" name="email" placeholder="Электронная почта" />
+        <input id="Name" type="text" name="name" placeholder="Имя" />
+        <button id="sendButton" type="button" onclick="login()" >Отправить</button>
+        <h3 id="textOr">или</h3>
+        <button id="registrationButton" type="button" onclick="changeToSignup()" >Регистрация</button>
+    </div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/js/changeLogin-Signup.js"></script>
 </body>
 </html>

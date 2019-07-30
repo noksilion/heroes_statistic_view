@@ -1,0 +1,103 @@
+body {
+    padding :0;
+    margin: 0;
+    font-family: Arial sans-serif;
+    background: url("/img/backgroungImg.png") no-repeat center top /cover;
+}
+
+div{
+    box-sizing: border-box;
+}
+.container{
+    display: flex;
+    width:939px;
+    margin:0 auto;
+}
+
+.staticInfo{
+    display: flex;
+    flex-direction: column;
+}
+.hommLogo{
+    margin-top: 82px;
+}
+
+.introInfo{
+    margin-top: 136px;
+}
+.login-signup {
+    margin-top: 198px;
+    margin-left: 137px;
+    width: 379px;
+    background: url(/img/loginBackground.png) no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+
+.login-signup button{
+    border: 1px solid #d9b028;
+    border-radius: 25px;
+    height: 32px;
+    width: 150px;
+    background-color: #1a1a1a;
+    color: #FFFFFF;
+    font-size: 20px;
+
+}
+
+.login-signup input{
+    height: 41px;
+    width: 276px;
+    background-color: #624f39;
+    border: 1px solid #d9b028;
+    font-size: 20px;
+}
+
+.login-signup h3 {
+    color: #d9b028;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+#Email{
+    margin-top:40px;
+}
+
+#Password{
+    margin-top:40px;
+}
+
+#Name{
+    margin-top:40px;
+}
+
+#sendButton{
+    margin-top:27px;
+}
+#textOr{
+    margin-top:10px
+}
+#textTitle{
+    font-size: 30px;
+    margin-top:0;
+}
+
+#registrationButton{
+    margin-top:10px;
+}
+
+#signupButton{
+    margin-top:10px;
+}
+
+::placeholder {
+    color: white;
+}
+input{
+    color : #fff
+}

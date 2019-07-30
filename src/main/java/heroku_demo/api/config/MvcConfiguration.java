@@ -3,6 +3,7 @@ package heroku_demo.api.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import heroku_demo.api.services.RestRequestServices;
 import heroku_demo.api.services.RestTemplateResponseErrorHandler;
+import heroku_demo.api.filters.TokenFilter;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +15,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import javax.management.MXBean;
 import javax.servlet.Filter;
-import java.util.ArrayList;
 
 @Configuration
 @EnableWebMvc
@@ -31,8 +30,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**","/js/**","/templates/**")
-                .addResourceLocations("classpath:/static/css/","classpath:/static/js/","classpath:/templates/");
+        registry.addResourceHandler("/css/**","/js/**","/templates/**","/img/**")
+                .addResourceLocations("classpath:/static/css/","classpath:/static/js/","classpath:/templates/","classpath:/static/img/");
 
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
