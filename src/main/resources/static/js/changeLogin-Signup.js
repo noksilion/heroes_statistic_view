@@ -32,7 +32,7 @@ function login(){
         if (this.status === 200) {
             var tokenObject = JSON.parse(this.responseText);
             document.cookie = "token=" + tokenObject.token;
-            window.location.replace(appHost + "/");
+            window.location.href = appHost + "/";
         }
         if (this.status !== 200) {
             var errorJson = JSON.parse(this.responseText);
@@ -65,7 +65,7 @@ function signup(){
             document.cookie = "token=" + tokenObject.token;
             var url  = new URL(appHost+"/");
             url.searchParams.append('message',"User Sucessfully added!\n Please activate it on your Email");
-            window.location.replace(url.toString());
+            window.location.href = url.toString();
         }else{
             var errorJson = JSON.parse(this.responseText);
             $('#errorText').remove();
