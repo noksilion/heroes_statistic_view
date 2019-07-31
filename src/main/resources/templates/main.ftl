@@ -11,6 +11,7 @@
  <#if message??>
      <h2>${message}</h2>
  </#if>
+
  <table>
      <tr>
          <th>Add Battle</th>

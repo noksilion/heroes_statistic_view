@@ -43,6 +43,11 @@ div{
     border: 1px solid #d9b028;
     border-radius: 25px;
     height: 32px;
+
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+
     width: 150px;
     background-color: #1a1a1a;
     color: #FFFFFF;
@@ -50,12 +55,17 @@ div{
 
 }
 
-.login-signup input{
+.login-signup input {
     height: 41px;
     width: 276px;
     background-color: #624f39;
     border: 1px solid #d9b028;
     font-size: 20px;
+    margin-top: 40px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 .login-signup h3 {
@@ -64,16 +74,8 @@ div{
     margin-bottom: 0;
 }
 
-#Email{
-    margin-top:40px;
-}
-
-#Password{
-    margin-top:40px;
-}
-
-#Name{
-    margin-top:40px;
+#textError{
+    margin-top: 40px;
 }
 
 #sendButton{

@@ -9,6 +9,8 @@
 <body>
 <div class="container">
 
+    <input id="restHost" type="hidden" value="${restHost}"  />
+    <input id="appHost" type="hidden" value="${appHost}"  />
     <div class="staticInfo">
         <div class ="hommLogo">
             <img src="/img/homm.png" alt="image"/>
@@ -23,7 +25,7 @@
     <div class ="login-signup" >
         <h3 id="textTitle">Войти</h3>
         <input id="Email" type="text" name="email" placeholder="Электронная почта" />
-        <input id="Name" type="text" name="name" placeholder="Имя" />
+        <input id="Password" type="text" name="password" placeholder="Пароль" />
         <button id="sendButton" type="button" onclick="login()" >Отправить</button>
         <h3 id="textOr">или</h3>
         <button id="registrationButton" type="button" onclick="changeToSignup()" >Регистрация</button>

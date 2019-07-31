@@ -2,7 +2,7 @@ package heroku_demo.api.controllers;
 
 import heroku_demo.api.exceptions.RestApiException;
 import heroku_demo.api.services.RestRequestServices;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,18 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Controller
-@AllArgsConstructor
+
 public class LoginSignupController {
     private final RestRequestServices restRequestServices;
+    @Value("${restApplicationHost}")
+    private String restApplicationHost;
+    @Value("${applicationHost}")
+    private String applicationHost;
 
-    @RequestMapping(value = "/view/login", method = RequestMethod.GET)
-    public String viewLoginPage() {
-        return "login";
+    public LoginSignupController(RestRequestServices restRequestServices) {
+        this.restRequestServices = restRequestServices;
     }
 
-    @RequestMapping(value = "/view/signup", method = RequestMethod.GET)
-    public String viewSignUpPage() {
-        return "signup";
+    @RequestMapping(value = "/view/login", method = RequestMethod.GET)
+    public ModelAndView viewLoginPage(Map<String, Object> model) {
+        model.put("restHost", restApplicationHost);
+        model.put("appHost",applicationHost);
+        return new ModelAndView("login", model);
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -32,6 +37,7 @@ public class LoginSignupController {
         try {
             restRequestServices.addTokenToResponse(email, password, userName,response);
         } catch (RestApiException restException) {
+            model.put("applicationHost", restApplicationHost);
             model.put("message",restException.getMessage());
             return new ModelAndView("signup", model);
         }
@@ -46,6 +52,7 @@ public class LoginSignupController {
             restRequestServices.addTokenToResponse(email, password, response);
         } catch (RestApiException restException) {
             model.put("message",restException.getMessage());
+            model.put("applicationHost", restApplicationHost);
             return new ModelAndView("login", model);
         }
         return new ModelAndView("main", model);
