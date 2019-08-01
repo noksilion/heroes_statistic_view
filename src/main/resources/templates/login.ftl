@@ -26,7 +26,7 @@
         <h3 id="textTitle">Войти</h3>
         <input id="Email" type="text" name="email" placeholder="Электронная почта" />
         <input id="Password" type="text" name="password" placeholder="Пароль" />
-        <button id="sendButton" type="button" onclick="login()" >Отправить</button>
+        <button id="sendButton" type="button" onclick="login()" >Войти</button>
         <h3 id="textOr">или</h3>
         <button id="registrationButton" type="button" onclick="changeToSignup()" >Регистрация</button>
     </div>

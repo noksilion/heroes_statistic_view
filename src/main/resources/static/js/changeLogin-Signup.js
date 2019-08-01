@@ -4,7 +4,7 @@ function changeToSignup(){
     $( "#textTitle" ).text('').append("Пройдите регистрацию");
     $( '<input id="Name" type="text" name="name" placeholder="Имя" />' ).insertAfter( "#Email" );
     $('#sendButton').remove();
-    $('<button id="sendButton" type="button" onclick="signup()" >Отправить</button>').insertAfter('#Password');
+    $('<button id="sendButton" type="button" onclick="signup()" >Регистрация</button>').insertAfter('#Password');
     $('#registrationButton').remove();
     $( '<button id="signupButton" type="button" onclick="changeToLogin()" >Войти</button>' ).insertAfter( "#textOr" );
 }
@@ -16,7 +16,7 @@ function changeToLogin(){
     $('#Name').remove();
     $('#signupButton').remove();
     $('#sendButton').remove();
-    $('<button id="sendButton" type="button" onclick="login()" >Отправить</button>').insertAfter('#Password');
+    $('<button id="sendButton" type="button" onclick="login()" >Войти</button>').insertAfter('#Password');
     $( '<button id="registrationButton" type="button" onclick="changeToSignup()">Регистрация</button>' ).insertAfter( "#textOr" );
 }
 
