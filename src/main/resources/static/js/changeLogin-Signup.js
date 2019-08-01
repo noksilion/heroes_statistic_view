@@ -1,5 +1,7 @@
 function changeToSignup(){
-    $( "#textTitle" ).text('').append("Регистрация");
+    $('#errorText').remove();
+    $('#Email').css('margin-top',"40px");
+    $( "#textTitle" ).text('').append("Пройдите регистрацию");
     $( '<input id="Name" type="text" name="name" placeholder="Имя" />' ).insertAfter( "#Email" );
     $('#sendButton').remove();
     $('<button id="sendButton" type="button" onclick="signup()" >Отправить</button>').insertAfter('#Password');
@@ -8,11 +10,13 @@ function changeToSignup(){
 }
 
 function changeToLogin(){
+    $('#errorText').remove();
+    $('#Email').css('margin-top',"40px");
     $( "#textTitle" ).text('').append("Войти");
-    $('#Password').remove();
+    $('#Name').remove();
     $('#signupButton').remove();
     $('#sendButton').remove();
-    $('<button id="sendButton" type="button" onclick="login()" >Отправить</button>').insertAfter('#Name');
+    $('<button id="sendButton" type="button" onclick="login()" >Отправить</button>').insertAfter('#Password');
     $( '<button id="registrationButton" type="button" onclick="changeToSignup()">Регистрация</button>' ).insertAfter( "#textOr" );
 }
 
@@ -30,16 +34,15 @@ function login(){
     xhr.open("POST", url.toString(), true);
     xhr.onreadystatechange = function() {
         if (this.status === 200) {
-            var tokenObject = JSON.parse(this.responseText);
-            document.cookie = "token=" + tokenObject.token;
+            addCookie(JSON.parse(this.responseText));
             window.location.href = appHost + "/";
         }
         if (this.status !== 200) {
             var errorJson = JSON.parse(this.responseText);
             $('#errorText').remove();
             $('<h3 id ="errorText"></h3>').insertAfter('#textTitle');
-            var errorMessage = errorJson['debugMessage'];
             $('#errorText').text('').append("Неправильный логин или пароль");
+            $('#Email').css('margin-top',"13px");
         }
     };
     xhr.send(JSON.stringify(credentials));
@@ -61,8 +64,7 @@ function signup(){
     xhr.open("POST", url.toString(), true);
     xhr.onreadystatechange = function() {
         if (this.status === 200) {
-            var tokenObject = JSON.parse(this.responseText);
-            document.cookie = "token=" + tokenObject.token;
+            addCookie(JSON.parse(this.responseText));
             var url  = new URL(appHost+"/");
             url.searchParams.append('message',"User Sucessfully added!\n Please activate it on your Email");
             window.location.href = url.toString();
@@ -72,7 +74,20 @@ function signup(){
             $('<h3 id ="errorText"></h3>').insertAfter('#textTitle');
             var errorMessage = errorJson['debugMessage'];
             $('#errorText').text('').append(errorMessage);
+            $('#Email').css('margin-top',"13px");
         }
     };
     xhr.send(JSON.stringify(credentials));
+}
+
+function addCookie(tokenObject){
+    var d = new Date();
+    var days=5;
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    var expires = ""+d.toUTCString();
+
+    document.cookie =
+        'token=' + tokenObject.token +
+        '; expires=' + expires +
+        '; path=/';
 }
