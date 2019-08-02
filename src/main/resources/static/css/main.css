@@ -1,0 +1,48 @@
+#externalDiv{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin-top:65px;
+    text-align: center;
+}
+#middleDiv {
+    width: 939px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-left: 15%;
+
+}
+
+#hommLogo{
+    margin-left: 12%;
+}
+#angelGif{
+    width: 180px;
+    text-align: center;
+}
+#dragonGif{
+    width: 180px;
+    text-align: center;
+}
+#menu{
+    width: 400px;
+    background-color: #624f39;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    --box-shadow-color: #897b6b;
+    box-shadow: inset 0 0 13px var(--box-shadow-color);
+}
+
+body {
+    padding :0;
+    margin: 0;
+    font-family: Arial sans-serif;
+    background: url("/img/backgroungImg.png") no-repeat center top /cover;
+}
+#goToMainPage{
+    margin-left: 10%;
+}
